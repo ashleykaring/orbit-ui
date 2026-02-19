@@ -1,0 +1,105 @@
+/* === Global Styles === */
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #66d0ea 0%, #915ac9 100%);
+}
+
+/* === Phone Layout === */
+
+.phone-outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.phone-frame {
+  position: relative;
+  width: min(375px, 40vh);
+  height: min(812px, calc(40vh * 2.164));
+  background: #1a1a1a;
+  border-radius: min(40px, 3.5vh);
+  padding: min(10px, 0.8vh);
+  box-shadow: 
+    0 0 0 min(12px, 1vh) #2a2a2a,
+    0 0 0 min(14px, 1.2vh) #1a1a1a,
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 80px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 25px;
+  background: #1a1a1a;
+  border-radius: 0 0 15px 15px;
+  z-index: 10;
+}
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: min(30px, 2.6vh);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(200px, 16vh);
+  height: min(30px, 2.5vh);
+  background: #1a1a1a;
+  border-radius: 0 0 min(20px, 1.5vh) min(20px, 1.5vh);
+  z-index: 5;
+}
+
+.camera {
+  position: absolute;
+  top: min(10px, 0.8vh);
+  right: min(90px, 6.5vh);
+  width: min(8px, 0.6vh);
+  height: min(8px, 0.6vh);
+  background: #333;
+  border-radius: 50%;
+  border: min(2px, 0.2vh) solid #222;
+  z-index: 6;
+}
+
+.speaker {
+  position: absolute;
+  top: min(18px, 1.5vh);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(60px, 5vh);
+  height: min(4px, 0.3vh);
+  background: #4b4b4b;
+  border-radius: min(2px, 0.2vh);
+  z-index: 6;
+}
+
+.content-area {
+  flex: 1;
+  padding-top: min(40px, 3.5vh);
+  padding-bottom: min(10px, 0.8vh);
+  overflow-y: auto;
+  background: white;
+}

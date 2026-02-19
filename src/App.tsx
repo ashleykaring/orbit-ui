@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
+import PhoneWrapper from "./layouts/PhoneWrapper.tsx";
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
+    <PhoneWrapper>
       <div>
         <a href="https://vite.dev" target="_blank">
         </a>
@@ -26,7 +27,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-    </>
+    </PhoneWrapper>
   )
 }
 
