@@ -17,4 +17,4 @@ This project is powered by React + TypeScript + Vite.
 Ashley Aring:
 Brady Welsh:
 Brendan Donovan:
-Yanitsa Ivanova:
+Yanitsa Ivanova: revised Task 2, set up PhoneWrapper, implemented the initial app layout and structure - created React components (Dashboard, Header, SideMenu, TodayActivity, EventsSection, ActivityCard, EventCard), built the side menu with on-click open functionality, including a link back to Home, created the Dashboard and PhoneWrapper style files
