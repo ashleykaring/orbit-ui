@@ -1,21 +1,31 @@
-import type { ReactNode } from "react";
-import "./PhoneWrapper.css";
+import "../styles/PhoneWrapper.css";
+import Dashboard from "../components/Dashboard";
+import SideMenu from "../components/SideMenu";
+import { useState } from "react";
 
-type PhoneWrapperProps = {
-  children: ReactNode;
-};
+export default function PhoneWrapper() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-export default function PhoneWrapper({ children }: PhoneWrapperProps) {
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <div className="phone-outer">
       <div className="phone-frame">
         <div className="phone-screen">
-          <div className="notch"></div>
           <div className="camera"></div>
           <div className="speaker"></div>
           <div className="content-area">
-            {children}
+            <Dashboard isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
           </div>
+          
+          {/* Side Menu Component */}
+          <SideMenu isOpen={isMenuOpen} onClose={closeMenu} />
         </div>
       </div>
     </div>

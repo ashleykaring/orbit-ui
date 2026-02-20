@@ -60,18 +60,6 @@ body {
   flex-direction: column;
 }
 
-.notch {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(200px, 16vh);
-  height: min(30px, 2.5vh);
-  background: #1a1a1a;
-  border-radius: 0 0 min(20px, 1.5vh) min(20px, 1.5vh);
-  z-index: 5;
-}
-
 .camera {
   position: absolute;
   top: min(10px, 0.8vh);
@@ -86,14 +74,14 @@ body {
 
 .speaker {
   position: absolute;
-  top: min(18px, 1.5vh);
+  top: min(10px, 0.8vh);
   left: 50%;
   transform: translateX(-50%);
   width: min(60px, 5vh);
   height: min(4px, 0.3vh);
-  background: #4b4b4b;
+  background: #a0a0a0;
   border-radius: min(2px, 0.2vh);
-  z-index: 6;
+  z-index: 15;
 }
 
 .content-area {
