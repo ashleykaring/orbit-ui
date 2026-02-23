@@ -48,7 +48,7 @@
 
 .dashboard {
   height: 100%;
-  overflow-y: auto;
+  overflow: visible;
   padding: var(--space-4);
   font-family: var(--font-family);
   background: var(--color-gray-100);
