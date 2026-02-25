@@ -12,6 +12,11 @@
   --color-gray-200: #e5e5e5;
   --color-gray-100: #f5f5f5;
 
+  --accent-purple-700: #6d28d9;
+  --accent-purple-500: #8b5cf6;
+  --accent-purple-100: #ede9fe;
+  --accent-purple-50: #f5f3ff;
+
   /* Typography */
   --font-family:
     -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui,
@@ -238,6 +243,109 @@
   background: var(--color-gray-100);
   border-radius: var(--radius-md);
   border: 1px dashed var(--color-gray-300);
+}
+
+/* ===== SAFETY RATINGS ======= */
+
+.safety-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.safety-search-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 58%;
+  max-width: 200px;
+  min-width: 145px;
+  align-self: flex-start;
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 6px 9px;
+  margin-bottom: var(--space-3);
+}
+
+.safety-search-icon {
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--color-gray-500);
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.safety-search-icon::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 1.5px;
+  border-radius: 1px;
+  background: var(--color-gray-500);
+  right: -4px;
+  bottom: -2px;
+  transform: rotate(40deg);
+  transform-origin: left center;
+}
+
+.safety-search-input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--color-gray-700);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family);
+}
+
+.safety-search-input::placeholder {
+  color: var(--color-gray-500);
+}
+
+.safety-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-gray-200);
+}
+
+.safety-app-name {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-3);
+}
+
+.safety-details-box {
+  background: #eceff3;
+  border-radius: var(--radius-md);
+  border: 1px solid #d9dee6;
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.safety-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.safety-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-600);
+}
+
+.safety-value {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-900);
+  text-align: right;
 }
 
 /* ===== SIDE MENU ============ */

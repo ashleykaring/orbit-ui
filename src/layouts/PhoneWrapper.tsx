@@ -1,10 +1,14 @@
 import "../styles/PhoneWrapper.css";
 import Dashboard from "../components/Dashboard";
+import SafetyRatingsPage from "../components/SafetyRatingsPage";
 import SideMenu from "../components/SideMenu";
 import { useState } from "react";
 
+export type AppPage = "dashboard" | "safety-ratings";
+
 export default function PhoneWrapper() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activePage, setActivePage] = useState<AppPage>("dashboard");
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -14,6 +18,11 @@ export default function PhoneWrapper() {
     setIsMenuOpen(false);
   };
 
+  const navigateTo = (page: AppPage) => {
+    setActivePage(page);
+    closeMenu();
+  };
+
   return (
     <div className="phone-outer">
       <div className="phone-frame">
@@ -21,11 +30,15 @@ export default function PhoneWrapper() {
           <div className="camera"></div>
           <div className="speaker"></div>
           <div className="content-area">
-            <Dashboard isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+            {activePage === "dashboard" ? (
+              <Dashboard isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+            ) : (
+              <SafetyRatingsPage isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+            )}
           </div>
           
           {/* Side Menu Component */}
-          <SideMenu isOpen={isMenuOpen} onClose={closeMenu} />
+          <SideMenu isOpen={isMenuOpen} onClose={closeMenu} onNavigate={navigateTo} />
         </div>
       </div>
     </div>
