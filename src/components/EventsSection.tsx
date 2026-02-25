@@ -1,5 +1,55 @@
-import "../styles/Dashboard.css";
 import EventCard from "./EventCard";
+
+const testEvents = [
+  {
+    title: "Inappropriate Request",
+    details: {
+      typeOfIncident: "Inappropriate Request",
+      severity: "High",
+      time: "Today at 3:00 PM",
+      platform: "Roblox",
+      account: "John's Laptop",
+      transcript: "scaryuser123: Hey, what's your address?\njohnny22: I live on 1 Grand Ave.",
+      screenshotUrl: "https://via.placeholder.com/600x400?text=Screenshot"
+    }
+  },
+  {
+    title: "Mean Comments",
+    details: {
+      typeOfIncident: "Mean Comments",
+      severity: "Warning",
+      time: "Today at 2:15 PM",
+      platform: "Minecraft",
+      account: "Katie's Tablet",
+      transcript: "meanuser290: Katie you're going nowhere in life!\nkatiegames1: :(",
+      screenshotUrl: "https://via.placeholder.com/600x400?text=Screenshot"
+    }
+  },
+  {
+    title: "Visited Unsafe Website",
+    details: {
+      typeOfIncident: "Visited Unsafe Website",
+      severity: "Medium",
+      time: "Today at 1:30 PM",
+      platform: "Chrome",
+      account: "Stevie's PC",
+      transcript: "Visited freemoney.com - flagged unsafe.",
+      screenshotUrl: "https://via.placeholder.com/600x400?text=Screenshot"
+    }
+  },
+  {
+    title: "Suspicious Link",
+    details: {
+      typeOfIncident: "Suspicious Link",
+      severity: "Low",
+      time: "Today at 11:45 AM",
+      platform: "Instagram",
+      account: "Emily's Chromebook",
+      transcript: "sussy_guy: Check out fijiforfree.com!!\nemilyrainbows__: Ooo ok!!",
+      screenshotUrl: "https://via.placeholder.com/600x400?text=Screenshot"
+    }
+  }
+];
 
 export default function EventsSection() {
   return (
@@ -16,18 +66,9 @@ export default function EventsSection() {
         </div>
       </div>
       <div className="events-list">
-        <EventCard title="Inappropriate Request">
-          <div className="event-placeholder"></div>
-        </EventCard>
-        <EventCard title="Mean Comments">
-          <div className="event-placeholder"></div>
-        </EventCard>
-        <EventCard title="Visited Unsafe Website">
-          <div className="event-placeholder"></div>
-        </EventCard>
-        <EventCard title="Suspicious Link">
-          <div className="event-placeholder"></div>
-        </EventCard>
+        {testEvents.map((event, idx) => (
+          <EventCard key={idx} title={event.title} details={event.details} />
+        ))}
       </div>
     </div>
   );
