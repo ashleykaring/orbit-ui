@@ -8,6 +8,7 @@ type ActivitySelectProps = {
 };
 
 const filterOptions = [
+  { label: "New", value: "new" },
   { label: "Cyberbullying", value: "cyber" },
   { label: "High-Risk", value: "risk" },
   { label: "Warnings", value: "warning" },
