@@ -19,6 +19,7 @@ type EventCardProps = {
 
 export default function EventCard({ title, details }: EventCardProps) {
   const [showPopup, setShowPopup] = useState(false);
+  const [showScreenshotPopup, setShowScreenshotPopup] = useState(false);
   const [reviewed, setReviewed] = useState(false);
 
   const handleCardClick = () => {
@@ -27,11 +28,13 @@ export default function EventCard({ title, details }: EventCardProps) {
 
   const handleClose = () => {
     setShowPopup(false);
+    setShowScreenshotPopup(false);
   };
 
   const handleMarkReviewed = () => {
     setReviewed(true);
     setShowPopup(false);
+    setShowScreenshotPopup(false);
   };
 
   return (
@@ -42,6 +45,7 @@ export default function EventCard({ title, details }: EventCardProps) {
         style={{ cursor: 'pointer', opacity: reviewed ? 0.5 : 1 }}
       >
         <div className="event-title">{title}</div>
+        {details?.time && <div className="event-time">{details.time}</div>}
       </div>
       {showPopup && details && (
         <div className="event-popup-overlay">
@@ -54,12 +58,27 @@ export default function EventCard({ title, details }: EventCardProps) {
             <div><b>Transcript:</b> <pre style={{whiteSpace:'pre-wrap'}}>{details.transcript}</pre></div>
             <div className="event-popup-actions">
               {details.screenshotUrl && (
-                <button onClick={() => window.open(details.screenshotUrl, '_blank')}>View Full Screenshot</button>
+                <button type="button" onClick={() => setShowScreenshotPopup(true)}>View Full Screenshot</button>
               )}
-              <button onClick={handleMarkReviewed}>Mark as Reviewed</button>
+              <button type="button" onClick={handleMarkReviewed}>Mark as Reviewed</button>
             </div>
-            <button className="event-popup-close" onClick={handleClose}>Close</button>
+            <button type="button" className="event-popup-close" onClick={handleClose}>Close</button>
           </div>
+          {showScreenshotPopup && details.screenshotUrl && (
+            <div className="screenshot-popup-overlay" onClick={() => setShowScreenshotPopup(false)}>
+              <div className="screenshot-popup" onClick={(e) => e.stopPropagation()}>
+                <button
+                  type="button"
+                  className="screenshot-popup-close"
+                  onClick={() => setShowScreenshotPopup(false)}
+                  aria-label="Close screenshot"
+                >
+                  X
+                </button>
+                <img src={details.screenshotUrl} alt={`${details.typeOfIncident} screenshot`} className="screenshot-popup-image" />
+              </div>
+            </div>
+          )}
         </div>
       )}
     </>

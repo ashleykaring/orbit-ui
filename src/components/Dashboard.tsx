@@ -26,7 +26,7 @@ export default function Dashboard({ isMenuOpen, toggleMenu }: DashboardProps) {
         <div className="user-icon"></div>
       </div>
       <TodayActivity activity={activitySelect} setActivity={setActivitySelect}/>
-      <EventsSection activity={activitySelect}/>
+      <EventsSection activity={activitySelect} setActivity={setActivitySelect}/>
     </div>
   );
 }

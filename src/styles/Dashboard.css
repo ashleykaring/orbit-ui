@@ -176,7 +176,6 @@
   justify-content: center;
   gap: var(--space-2);
   align-items: baseline;
-
 }
 
 .modified-activity-card .activity-value {
@@ -187,10 +186,10 @@
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-bold);
   color: var(--color-black);
-
 }
 
-.activity-card:active, .modified-activity-card:active {
+.activity-card:active,
+.modified-activity-card:active {
   transform: scale(0.98);
 }
 
@@ -264,7 +263,12 @@
 .event-title {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
-  margin-bottom: var(--space-3);
+  margin-bottom: 4px;
+}
+
+.event-time {
+  font-size: 11.5px;
+  color: var(--color-gray-600);
 }
 
 .event-placeholder {
@@ -500,8 +504,23 @@
   font-size: var(--font-size-sm);
   color: var(--color-gray-700);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .filter-dropdown-item:hover {
   background: var(--color-gray-100);
+}
+
+.filter-dropdown-item-selected {
+  background: var(--color-gray-100);
+}
+
+.filter-checkmark {
+  width: 12px;
+  color: var(--color-gray-900);
+  font-size: var(--font-size-sm);
+  line-height: 1;
+  font-weight: var(--font-weight-semibold);
 }
