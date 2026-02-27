@@ -1,5 +1,9 @@
 import EventCard from "./EventCard";
 
+type ActivitySelectProps = {
+  activity: string;
+};
+
 const testEvents = [
   {
     title: "Inappropriate Request",
@@ -10,7 +14,8 @@ const testEvents = [
       platform: "Roblox",
       account: "John's Laptop",
       transcript: "scaryuser123: Hey, what's your address?\njohnny22: I live on 1 Grand Ave.",
-      screenshotUrl: "https://via.placeholder.com/600x400?text=Screenshot"
+      screenshotUrl: "https://via.placeholder.com/600x400?text=Screenshot",
+      tags: ["new", "risk"]
     }
   },
   {
@@ -22,7 +27,8 @@ const testEvents = [
       platform: "Minecraft",
       account: "Katie's Tablet",
       transcript: "meanuser290: Katie you're going nowhere in life!\nkatiegames1: :(",
-      screenshotUrl: "https://via.placeholder.com/600x400?text=Screenshot"
+      screenshotUrl: "https://via.placeholder.com/600x400?text=Screenshot",
+      tags: ["new", "cyber"]
     }
   },
   {
@@ -34,7 +40,9 @@ const testEvents = [
       platform: "Chrome",
       account: "Stevie's PC",
       transcript: "Visited freemoney.com - flagged unsafe.",
-      screenshotUrl: "https://via.placeholder.com/600x400?text=Screenshot"
+      screenshotUrl: "https://via.placeholder.com/600x400?text=Screenshot",
+      tags: ["new"]
+
     }
   },
   {
@@ -46,12 +54,14 @@ const testEvents = [
       platform: "Instagram",
       account: "Emily's Chromebook",
       transcript: "sussy_guy: Check out fijiforfree.com!!\nemilyrainbows__: Ooo ok!!",
-      screenshotUrl: "https://via.placeholder.com/600x400?text=Screenshot"
+      screenshotUrl: "https://via.placeholder.com/600x400?text=Screenshot",
+      tags: ["warning"]
+
     }
   }
 ];
 
-export default function EventsSection() {
+export default function EventsSection({ activity } : ActivitySelectProps) {
   return (
     <div className="section">
       <h2 className="section-title">Events</h2>
@@ -67,7 +77,7 @@ export default function EventsSection() {
       </div>
       <div className="events-list">
         {testEvents.map((event, idx) => (
-          <EventCard key={idx} title={event.title} details={event.details} />
+          (!activity || (event.details.tags.includes(activity))) && <EventCard key={idx} title={event.title} details={event.details} />
         ))}
       </div>
     </div>

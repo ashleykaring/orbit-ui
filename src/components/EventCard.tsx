@@ -9,6 +9,7 @@ type EventDetails = {
   account: string;
   transcript: string;
   screenshotUrl?: string;
+  tags: string[];
 };
 
 type EventCardProps = {
