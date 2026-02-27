@@ -1,8 +1,11 @@
+import { useState } from "react";
 import EventCard from "./EventCard";
 
 type ActivitySelectProps = {
   activity: string;
 };
+
+const filterOptions = ["Cyberbullying", "High-Risk", "New Events", "Warnings"];
 
 const testEvents = [
   {
@@ -42,7 +45,6 @@ const testEvents = [
       transcript: "Visited freemoney.com - flagged unsafe.",
       screenshotUrl: "https://via.placeholder.com/600x400?text=Screenshot",
       tags: ["new"]
-
     }
   },
   {
@@ -56,12 +58,13 @@ const testEvents = [
       transcript: "sussy_guy: Check out fijiforfree.com!!\nemilyrainbows__: Ooo ok!!",
       screenshotUrl: "https://via.placeholder.com/600x400?text=Screenshot",
       tags: ["warning"]
-
     }
   }
 ];
 
 export default function EventsSection({ activity } : ActivitySelectProps) {
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
+
   return (
     <div className="section">
       <h2 className="section-title">Events</h2>
@@ -70,9 +73,24 @@ export default function EventsSection({ activity } : ActivitySelectProps) {
           <span>Sort</span>
           <div className="dropdown-arrow"></div>
         </div>
-        <div className="dropdown">
-          <span>Filter</span>
-          <div className="dropdown-arrow"></div>
+        <div className="filter-dropdown-wrapper">
+          <button
+            type="button"
+            className="dropdown"
+            onClick={() => setShowFilterDropdown((prev) => !prev)}
+          >
+            <span>Filter</span>
+            <div className={`dropdown-arrow ${showFilterDropdown ? "dropdown-arrow-open" : ""}`}></div>
+          </button>
+          {showFilterDropdown && (
+            <div className="filter-dropdown-menu">
+              {filterOptions.map((option) => (
+                <button key={option} type="button" className="filter-dropdown-item">
+                  {option}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       <div className="events-list">
