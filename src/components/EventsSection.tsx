@@ -141,7 +141,7 @@ export default function EventsSection({
           <div className="filter-dropdown-wrapper">
             <button
               type="button"
-              className="dropdown"
+              className={`dropdown ${showSortDropdown ? "dropdown-open" : ""}`}
               onClick={() => setShowSortDropdown((prev) => !prev)}
             >
               <span>Sort</span>
@@ -177,7 +177,7 @@ export default function EventsSection({
           <div className="filter-dropdown-wrapper">
             <button
               type="button"
-              className="dropdown"
+              className={`dropdown ${showFilterDropdown ? "dropdown-open" : ""}`}
               onClick={() => setShowFilterDropdown((prev) => !prev)}
             >
               <span>Filter</span>

@@ -58,9 +58,21 @@ export default function EventCard({ title, details }: EventCardProps) {
             <div><b>Transcript:</b> <pre style={{whiteSpace:'pre-wrap'}}>{details.transcript}</pre></div>
             <div className="event-popup-actions">
               {details.screenshotUrl && (
-                <button type="button" onClick={() => setShowScreenshotPopup(true)}>View Full Screenshot</button>
+                <button
+                  type="button"
+                  className="btn-primary"
+                  onClick={() => setShowScreenshotPopup(true)}
+                >
+                  View Full Screenshot
+                </button>
               )}
-              <button type="button" onClick={handleMarkReviewed}>Mark as Reviewed</button>
+              <button
+                type="button"
+                className="btn-secondary"
+                onClick={handleMarkReviewed}
+              >
+                Mark as Reviewed
+              </button>
             </div>
             <button type="button" className="event-popup-close" onClick={handleClose}>Close</button>
           </div>

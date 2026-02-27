@@ -171,11 +171,22 @@
   cursor: pointer;
 }
 
+.activity-card:hover {
+  border-color: var(--accent-purple-100);
+}
+
 .modified-activity-card {
   display: flex;
   justify-content: center;
   gap: var(--space-2);
   align-items: baseline;
+  border-color: var(--color-gray-200);
+  background: linear-gradient(
+    0deg,
+    var(--accent-purple-50),
+    var(--color-white)
+  );
+  box-shadow: 0 6px 14px rgba(139, 92, 246, 0.2);
 }
 
 .modified-activity-card .activity-value {
@@ -226,9 +237,20 @@
   gap: var(--space-2);
 }
 
+.dropdown:hover {
+  border-color: var(--accent-purple-100);
+}
+
+.dropdown-open {
+  border-color: var(--accent-purple-500);
+  background: var(--accent-purple-50);
+  color: var(--accent-purple-700);
+}
+
 .dropdown:focus {
   outline: none;
-  border-color: var(--color-gray-700);
+  border-color: var(--accent-purple-500);
+  box-shadow: 0 0 0 2px var(--accent-purple-100);
 }
 
 .dropdown-arrow {
@@ -242,6 +264,7 @@
 
 .dropdown-arrow-open {
   transform: rotate(180deg);
+  border-top-color: var(--accent-purple-700);
 }
 
 /* ===== EVENTS LIST =========== */
@@ -268,7 +291,7 @@
 
 .event-time {
   font-size: 11.5px;
-  color: var(--color-gray-600);
+  color: var(--accent-purple-700);
 }
 
 .event-placeholder {
@@ -353,9 +376,9 @@
 }
 
 .safety-details-box {
-  background: #eceff3;
+  background: #f7f4ff;
   border-radius: var(--radius-md);
-  border: 1px solid #d9dee6;
+  border: 1px solid #eee8ff;
   padding: var(--space-3);
   display: flex;
   flex-direction: column;
@@ -488,7 +511,7 @@
   left: 0;
   min-width: 160px;
   background: var(--color-white);
-  border: 1px solid var(--color-gray-200);
+  border: 1px solid var(--accent-purple-100);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
   overflow: hidden;
@@ -510,16 +533,17 @@
 }
 
 .filter-dropdown-item:hover {
-  background: var(--color-gray-100);
+  background: var(--accent-purple-50);
 }
 
 .filter-dropdown-item-selected {
-  background: var(--color-gray-100);
+  background: var(--accent-purple-100);
+  color: var(--accent-purple-700);
 }
 
 .filter-checkmark {
   width: 12px;
-  color: var(--color-gray-900);
+  color: var(--accent-purple-700);
   font-size: var(--font-size-sm);
   line-height: 1;
   font-weight: var(--font-weight-semibold);
