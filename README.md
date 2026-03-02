@@ -10,7 +10,7 @@ This project is powered by React + TypeScript + Vite.
 
 1. Use the interface to view recent incidents that occurred and learn details about them.
 2. Learn about the websites/apps your child is using so you can make decisions on whether they are safe for your child.
-3. Get notified when a potentially dangerous incident occurs and understand what actions to take.
+3. Get notified when a potentially dangerous incident occurs.
 
 # To Run:
 
