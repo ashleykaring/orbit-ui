@@ -71,6 +71,19 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: var(--space-5);
+  position: relative;
+}
+
+/* Centered header logo */
+.header-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 }
 
 .header-left {
@@ -80,16 +93,12 @@
 }
 
 .orbit-logo {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--color-gray-700);
-  cursor: pointer;
-  transition: background-color 0.2s var(--ease);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-white);
+  height: 44px;
+  width: auto;
+  max-width: 320px;
+  display: block;
+  object-fit: contain;
+  pointer-events: none;
 }
 
 /* ===== MENU BUTTON ======== */
@@ -132,6 +141,12 @@
   height: 26px;
   border-radius: 50%;
   background: var(--color-gray-300);
+}
+
+/* Ensure profile img fits circular mask */
+.user-icon {
+  object-fit: cover;
+  display: inline-block;
 }
 
 /* ===== SECTION TITLES ======== */
@@ -281,6 +296,7 @@
   padding: var(--space-4);
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--color-gray-200);
+  border-left: 4px solid transparent;
 }
 
 .event-title {
@@ -299,6 +315,23 @@
   background: var(--color-gray-100);
   border-radius: var(--radius-md);
   border: 1px dashed var(--color-gray-300);
+}
+
+/* Severity left-border indicators */
+.event-card--severity-low {
+  border-left-color: #10b981; /* green-500 */
+}
+.event-card--severity-medium {
+  border-left-color: #f59e0b; /* amber-500 */
+}
+.event-card--severity-high {
+  border-left-color: #ef4444; /* red-500 */
+}
+.event-card--severity-warning {
+  border-left-color: #f97316; /* orange-500 */
+}
+.event-card--severity-critical {
+  border-left-color: #b91c1c; /* darker red */
 }
 
 /* ===== SAFETY RATINGS ======= */

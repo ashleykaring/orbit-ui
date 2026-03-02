@@ -21,9 +21,12 @@ export default function Dashboard({ isMenuOpen, toggleMenu }: DashboardProps) {
             <div className={`menu-line ${isMenuOpen ? 'menu-line--open' : ''}`}></div>
             <div className={`menu-line ${isMenuOpen ? 'menu-line--open' : ''}`}></div>
           </div>
-          <span className="orbit-text">Orbit</span>
+          {/* left side keeps menu only; centered logo below */}
         </div>
-        <div className="user-icon"></div>
+        <div className="header-center">
+          <img src="/orbit_logo_rectangle_tight_dark.png" alt="Orbit" className="orbit-logo" />
+        </div>
+        <img src="/profile.png" alt="Profile" className="user-icon" />
       </div>
       <TodayActivity activity={activitySelect} setActivity={setActivitySelect}/>
       <EventsSection activity={activitySelect} setActivity={setActivitySelect}/>

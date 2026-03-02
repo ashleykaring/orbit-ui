@@ -1,4 +1,5 @@
 import "../styles/Dashboard.css";
+import { useMemo, useState } from "react";
 
 type SafetyRatingsPageProps = {
   isMenuOpen?: boolean;
@@ -43,6 +44,13 @@ export default function SafetyRatingsPage({
   isMenuOpen,
   toggleMenu,
 }: SafetyRatingsPageProps) {
+  const [query, setQuery] = useState<string>("");
+
+  const filteredRatings = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return appRatings;
+    return appRatings.filter((r) => r.appName.toLowerCase().includes(q));
+  }, [query]);
   return (
     <div className="dashboard">
       <div className="header">
@@ -58,26 +66,32 @@ export default function SafetyRatingsPage({
               className={`menu-line ${isMenuOpen ? "menu-line--open" : ""}`}
             ></div>
           </div>
-          <span className="orbit-text">Orbit</span>
         </div>
-        <div className="user-icon"></div>
+        <div className="header-center">
+          <img src="/orbit_logo_rectangle_tight_dark.png" alt="Orbit" className="orbit-logo" />
+        </div>
+        <img src="/profile.png" alt="Profile" className="user-icon" />
       </div>
 
       <div className="section">
         <h2 className="section-title">Safety Ratings</h2>
-        <div className="safety-search-bar" aria-hidden="true">
-          <span className="safety-search-icon"></span>
+        <div className="safety-search-bar">
+          <span className="safety-search-icon" aria-hidden="true"></span>
           <input
             className="safety-search-input"
             type="text"
             placeholder="Search apps"
-            readOnly
-            tabIndex={-1}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            aria-label="Search apps"
           />
         </div>
         <div className="safety-list">
-          {appRatings.map((rating) => (
-            <div className="safety-card" key={rating.appName}>
+          {filteredRatings.length === 0 ? (
+            <div className="event-placeholder">No apps match your search.</div>
+          ) : (
+            filteredRatings.map((rating) => (
+              <div className="safety-card" key={rating.appName}>
               <div className="safety-app-name">{rating.appName}</div>
               <div className="safety-details-box">
                 <div className="safety-row">
@@ -94,7 +108,7 @@ export default function SafetyRatingsPage({
                 </div>
               </div>
             </div>
-          ))}
+          ))) }
         </div>
       </div>
     </div>

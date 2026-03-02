@@ -39,8 +39,9 @@ export default function EventCard({ title, details }: EventCardProps) {
 
   return (
     <>
+      {/** derive severity class from details.severity (e.g., High -> event-card--severity-high) */}
       <div
-        className={`event-card ${reviewed ? 'event-card--reviewed' : ''}`}
+        className={`event-card ${details?.severity ? `event-card--severity-${details.severity.toLowerCase().replace(/\s+/g, '-')}` : ''} ${reviewed ? 'event-card--reviewed' : ''}`}
         onClick={handleCardClick}
         style={{ cursor: 'pointer', opacity: reviewed ? 0.5 : 1 }}
       >

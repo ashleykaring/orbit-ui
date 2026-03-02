@@ -33,7 +33,7 @@ export default function SideMenu({ isOpen, onClose, onNavigate }: SideMenuProps)
           <a href="#" className="side-menu-item" onClick={handleNavigate("dashboard")}>
             <span>Home</span>
           </a>
-          <a href="#" className="side-menu-item" onClick={handleClose}>
+          {/* <a href="#" className="side-menu-item" onClick={handleClose}>
             <span>Profile</span>
           </a>
           <a href="#" className="side-menu-item" onClick={handleClose}>
@@ -47,13 +47,13 @@ export default function SideMenu({ isOpen, onClose, onNavigate }: SideMenuProps)
           </a>
           <a href="#" className="side-menu-item" onClick={handleClose}>
             <span>Archive</span>
-          </a>
+          </a> */}
           <a href="#" className="side-menu-item" onClick={handleNavigate("safety-ratings")}>
             <span>Safety Ratings</span>
           </a>
-          <a href="#" className="side-menu-item" onClick={handleClose}>
+          {/* <a href="#" className="side-menu-item" onClick={handleClose}>
             <span>Summary</span>
-          </a>
+          </a> */}
         </nav>
         
         <div className="side-menu-footer">
