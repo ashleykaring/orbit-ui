@@ -38,20 +38,6 @@ const testEvents = [
     },
   },
   {
-    title: "Mean Comments",
-    details: {
-      typeOfIncident: "Mean Comments",
-      severity: "Warning",
-      time: `${todayDate} at 2:15 PM`,
-      platform: "Minecraft",
-      account: "Katie's Tablet",
-      transcript:
-        "meanuser290: Katie you're going nowhere in life!\nkatiegames1: :(",
-      screenshotUrl: "/examplescreenshot.png",
-      tags: ["new", "cyber"],
-    },
-  },
-  {
     title: "Visited Unsafe Website",
     details: {
       typeOfIncident: "Visited Unsafe Website",
@@ -62,6 +48,20 @@ const testEvents = [
       transcript: "Visited freemoney.com - flagged unsafe.",
       screenshotUrl: "/examplescreenshot.png",
       tags: ["new", "warning"],
+    },
+  },
+  {
+    title: "Mean Comments",
+    details: {
+      typeOfIncident: "Mean Comments",
+      severity: "Warning",
+      time: `${todayDate} at 1:02 PM`,
+      platform: "Minecraft",
+      account: "Katie's Tablet",
+      transcript:
+        "meanuser290: Katie you're going nowhere in life!\nkatiegames1: :(",
+      screenshotUrl: "/examplescreenshot.png",
+      tags: ["new", "cyber"],
     },
   },
   {
@@ -110,10 +110,10 @@ export default function EventsSection({
     if (tags.includes("risk")) {
       return 0;
     }
-    if (tags.includes("warning")) {
+    if (tags.includes("cyber")) {
       return 1;
     }
-    if (tags.includes("cyber")) {
+    if (tags.includes("warning")) {
       return 2;
     }
     return 3;
@@ -122,8 +122,11 @@ export default function EventsSection({
   const visibleEvents = testEvents.filter(
     (event) =>
       (selectedFilters.length > 0 &&
-        selectedFilters.some((filter) => event.details.tags.includes(filter))) ||
-      (selectedFilters.length === 0 && matchesTopCardFilter(event.details.tags)),
+        selectedFilters.some((filter) =>
+          event.details.tags.includes(filter),
+        )) ||
+      (selectedFilters.length === 0 &&
+        matchesTopCardFilter(event.details.tags)),
   );
 
   const sortedEvents =
@@ -141,7 +144,9 @@ export default function EventsSection({
     });
     if (severe) {
       window.dispatchEvent(
-        new CustomEvent("orbit:severe-incident", { detail: { title: severe.title } }),
+        new CustomEvent("orbit:severe-incident", {
+          detail: { title: severe.title },
+        }),
       );
     }
   }, [sortedEvents]);
@@ -227,7 +232,11 @@ export default function EventsSection({
       </div>
       <div className="events-list">
         {sortedEvents.map((event) => (
-          <EventCard key={event.title} title={event.title} details={event.details} />
+          <EventCard
+            key={event.title}
+            title={event.title}
+            details={event.details}
+          />
         ))}
       </div>
     </div>
