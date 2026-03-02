@@ -1,5 +1,5 @@
 import "../styles/Dashboard.css";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 type EventDetails = {
   typeOfIncident: string;
@@ -37,10 +37,27 @@ export default function EventCard({ title, details }: EventCardProps) {
     setShowScreenshotPopup(false);
   };
 
+  const cardRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail as { title?: string } | undefined;
+      if (!detail?.title) return;
+      if (detail.title === title) {
+        setShowPopup(true);
+        setTimeout(() => {
+          cardRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 80);
+      }
+    };
+    window.addEventListener("orbit:open-event", handler as EventListener);
+    return () => window.removeEventListener("orbit:open-event", handler as EventListener);
+  }, [title]);
+
   return (
     <>
-      {/** derive severity class from details.severity (e.g., High -> event-card--severity-high) */}
       <div
+        ref={cardRef}
         className={`event-card ${details?.severity ? `event-card--severity-${details.severity.toLowerCase().replace(/\s+/g, '-')}` : ''} ${reviewed ? 'event-card--reviewed' : ''}`}
         onClick={handleCardClick}
         style={{ cursor: 'pointer', opacity: reviewed ? 0.5 : 1 }}

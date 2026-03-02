@@ -134,6 +134,18 @@ export default function EventsSection({
         )
       : visibleEvents;
 
+  useEffect(() => {
+    const severe = sortedEvents.find((e) => {
+      const sev = e.details.severity?.toLowerCase() ?? "";
+      return sev === "high" || sev === "critical";
+    });
+    if (severe) {
+      window.dispatchEvent(
+        new CustomEvent("orbit:severe-incident", { detail: { title: severe.title } }),
+      );
+    }
+  }, [sortedEvents]);
+
   return (
     <div className="section">
       <h2 className="section-title">Events</h2>

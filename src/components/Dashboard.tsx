@@ -1,5 +1,6 @@
 import TodayActivity from "./TodayActivity";
 import EventsSection from "./EventsSection";
+import Notification from "./Notification";
 import "../styles/Dashboard.css";
 import { useState } from "react";
 
@@ -14,6 +15,7 @@ export default function Dashboard({ isMenuOpen, toggleMenu }: DashboardProps) {
 
   return (
     <div className="dashboard">
+      <Notification />
       <div className="header">
         <div className="header-left">
           <div className="menu-button" onClick={toggleMenu}>
@@ -21,7 +23,6 @@ export default function Dashboard({ isMenuOpen, toggleMenu }: DashboardProps) {
             <div className={`menu-line ${isMenuOpen ? 'menu-line--open' : ''}`}></div>
             <div className={`menu-line ${isMenuOpen ? 'menu-line--open' : ''}`}></div>
           </div>
-          {/* left side keeps menu only; centered logo below */}
         </div>
         <div className="header-center">
           <img src="/orbit_logo_rectangle_tight_dark.png" alt="Orbit" className="orbit-logo" />

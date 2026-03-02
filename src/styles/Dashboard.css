@@ -317,7 +317,45 @@
   border: 1px dashed var(--color-gray-300);
 }
 
-/* Severity left-border indicators */
+.app-notification {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 8px;
+  background: var(--accent-purple-700);
+  color: var(--color-white);
+  padding: 10px 14px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.app-notification {
+  width: calc(100% - 32px);
+  max-width: 360px;
+  box-sizing: border-box;
+}
+.app-notification-content {
+  font-size: 14px;
+}
+.app-notification-dismiss {
+  background: transparent;
+  border: 0;
+  color: var(--color-white);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.app-notification-dismiss {
+  margin-left: auto;
+  padding-left: 12px;
+}
+
 .event-card--severity-low {
   border-left-color: #10b981; /* green-500 */
 }
