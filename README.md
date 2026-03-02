@@ -15,8 +15,8 @@ This project is powered by React + TypeScript + Vite.
 # To Run:
 
 1. Download the repo
-2. Run 'npm install'
-3. Run 'npm run dev'
+2. Run `npm install`
+3. Run `npm run dev`
 
 # Team contribution
 
