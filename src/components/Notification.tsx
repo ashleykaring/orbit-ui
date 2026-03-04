@@ -7,7 +7,9 @@ export default function Notification() {
   useEffect(() => {
     const handler = (e: Event) => {
       if ((window as any).__orbitNotificationShown) return;
-      const detail = (e as CustomEvent).detail as { title?: string } | undefined;
+      const detail = (e as CustomEvent).detail as
+        | { title?: string }
+        | undefined;
       if (detail?.title) {
         (window as any).__orbitNotificationShown = true;
         setTitle(detail.title);
@@ -15,20 +17,32 @@ export default function Notification() {
       }
     };
     window.addEventListener("orbit:severe-incident", handler as EventListener);
-    return () => window.removeEventListener("orbit:severe-incident", handler as EventListener);
+    return () =>
+      window.removeEventListener(
+        "orbit:severe-incident",
+        handler as EventListener,
+      );
   }, []);
 
   if (!visible || !title) return null;
 
   const handleClick = () => {
-    window.dispatchEvent(new CustomEvent("orbit:open-event", { detail: { title } }));
+    window.dispatchEvent(
+      new CustomEvent("orbit:open-event", { detail: { title } }),
+    );
     setVisible(false);
   };
 
   return (
     <div className="app-notification" role="status" onClick={handleClick}>
+      <div className="app-notification-icon" aria-hidden="true">
+        !
+      </div>
       <div className="app-notification-content">
-          <strong>ALERT:</strong>&nbsp;{title}
+        <div className="app-notification-title">
+          Alert: New High-Risk Event Detected
+        </div>
+        <div className="app-notification-subtitle">Tap to view details</div>
       </div>
       <button
         type="button"
