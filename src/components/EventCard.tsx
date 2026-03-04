@@ -17,10 +17,34 @@ type EventCardProps = {
   details?: EventDetails;
 };
 
+const REVIEWED_STORAGE_KEY = "orbit-reviewed-events";
+
+const getStoredReviewedState = (title: string) => {
+  try {
+    const raw = window.localStorage.getItem(REVIEWED_STORAGE_KEY);
+    if (!raw) return false;
+    const parsed = JSON.parse(raw) as Record<string, boolean>;
+    return Boolean(parsed[title]);
+  } catch {
+    return false;
+  }
+};
+
+const setStoredReviewedState = (title: string, isReviewed: boolean) => {
+  try {
+    const raw = window.localStorage.getItem(REVIEWED_STORAGE_KEY);
+    const parsed = raw ? (JSON.parse(raw) as Record<string, boolean>) : {};
+    parsed[title] = isReviewed;
+    window.localStorage.setItem(REVIEWED_STORAGE_KEY, JSON.stringify(parsed));
+  } catch {
+    // Ignore storage errors so the UI still works.
+  }
+};
+
 export default function EventCard({ title, details }: EventCardProps) {
   const [showPopup, setShowPopup] = useState(false);
   const [showScreenshotPopup, setShowScreenshotPopup] = useState(false);
-  const [reviewed, setReviewed] = useState(false);
+  const [reviewed, setReviewed] = useState(() => getStoredReviewedState(title));
 
   const handleCardClick = () => {
     setShowPopup(true);
@@ -31,8 +55,10 @@ export default function EventCard({ title, details }: EventCardProps) {
     setShowScreenshotPopup(false);
   };
 
-  const handleMarkReviewed = () => {
-    setReviewed(true);
+  const handleToggleReviewed = () => {
+    const nextValue = !reviewed;
+    setReviewed(nextValue);
+    setStoredReviewedState(title, nextValue);
     setShowPopup(false);
     setShowScreenshotPopup(false);
   };
@@ -87,9 +113,9 @@ export default function EventCard({ title, details }: EventCardProps) {
               <button
                 type="button"
                 className="btn-secondary"
-                onClick={handleMarkReviewed}
+                onClick={handleToggleReviewed}
               >
-                Mark as Reviewed
+                {reviewed ? "Mark as Unreviewed" : "Mark as Reviewed"}
               </button>
             </div>
             <button type="button" className="event-popup-close" onClick={handleClose}>Close</button>
