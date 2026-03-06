@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import EventCard from "./EventCard";
+import type { EventItem } from "../data/events";
 
 type ActivitySelectProps = {
   activity: string;
   setActivity: Dispatch<SetStateAction<string>>;
+  events: EventItem[];
+  reviewedEvents: Record<string, boolean>;
+  onToggleReviewed: (title: string, nextReviewed: boolean) => void;
 };
 
 const filterOptions = [
@@ -15,74 +19,12 @@ const filterOptions = [
 ];
 const sortOptions = [{ label: "Severity", value: "severity" }];
 
-const todayDate = new Date().toLocaleDateString("en-US", {
-  month: "long",
-  day: "numeric",
-  year: "numeric",
-});
-const february26Date = `February 26, ${new Date().getFullYear()}`;
-
-const testEvents = [
-  {
-    title: "Inappropriate Request",
-    details: {
-      typeOfIncident: "Inappropriate Request",
-      severity: "High",
-      time: `${todayDate} at 3:00 PM`,
-      platform: "Roblox",
-      account: "John's Laptop",
-      transcript:
-        "scaryuser123: Hey, what's your address?\njohnny22: I live on 1 Grand Ave.",
-      screenshotUrl: "/examplescreenshot.png",
-      tags: ["new", "risk"],
-    },
-  },
-  {
-    title: "Visited Unsafe Website",
-    details: {
-      typeOfIncident: "Visited Unsafe Website",
-      severity: "Medium",
-      time: `${todayDate} at 1:30 PM`,
-      platform: "Chrome",
-      account: "Stevie's PC",
-      transcript: "Visited freemoney.com - flagged unsafe.",
-      screenshotUrl: "/examplescreenshot.png",
-      tags: ["new", "warning"],
-    },
-  },
-  {
-    title: "Mean Comments",
-    details: {
-      typeOfIncident: "Mean Comments",
-      severity: "Warning",
-      time: `${todayDate} at 1:02 PM`,
-      platform: "Minecraft",
-      account: "Katie's Tablet",
-      transcript:
-        "meanuser290: Katie you're going nowhere in life!\nkatiegames1: :(",
-      screenshotUrl: "/examplescreenshot.png",
-      tags: ["new", "cyber"],
-    },
-  },
-  {
-    title: "Suspicious Link",
-    details: {
-      typeOfIncident: "Suspicious Link",
-      severity: "Low",
-      time: `${february26Date} at 11:45 AM`,
-      platform: "Instagram",
-      account: "Emily's Chromebook",
-      transcript:
-        "sussy_guy: Check out fijiforfree.com!!\nemilyrainbows__: Ooo ok!!",
-      screenshotUrl: "/examplescreenshot.png",
-      tags: ["warning"],
-    },
-  },
-];
-
 export default function EventsSection({
   activity,
   setActivity,
+  events,
+  reviewedEvents,
+  onToggleReviewed,
 }: ActivitySelectProps) {
   const showSortControl = !activity || activity === "new";
   const [showSortDropdown, setShowSortDropdown] = useState(false);
@@ -96,15 +38,26 @@ export default function EventsSection({
       setShowFilterDropdown(false);
     }
   }, [activity]);
-  const matchesTopCardFilter = (tags: string[]) => {
+  const isReviewed = (event: EventItem) => Boolean(reviewedEvents[event.title]);
+  const isNewAndUnreviewed = (event: EventItem) =>
+    event.details.tags.includes("new") && !isReviewed(event);
+
+  const matchesTopCardFilter = (event: EventItem) => {
     if (!activity) {
       return true;
     }
     if (activity === "new") {
-      return tags.includes("new");
+      return isNewAndUnreviewed(event);
     }
-    return tags.includes("new") && tags.includes(activity);
+    return isNewAndUnreviewed(event) && event.details.tags.includes(activity);
   };
+
+  const matchesSelectedFilters = (event: EventItem) =>
+    selectedFilters.some((filter) =>
+      filter === "new"
+        ? isNewAndUnreviewed(event)
+        : event.details.tags.includes(filter),
+    );
 
   const getSeverityOrder = (tags: string[]) => {
     if (tags.includes("risk")) {
@@ -119,14 +72,10 @@ export default function EventsSection({
     return 3;
   };
 
-  const visibleEvents = testEvents.filter(
+  const visibleEvents = events.filter(
     (event) =>
-      (selectedFilters.length > 0 &&
-        selectedFilters.some((filter) =>
-          event.details.tags.includes(filter),
-        )) ||
-      (selectedFilters.length === 0 &&
-        matchesTopCardFilter(event.details.tags)),
+      (selectedFilters.length > 0 && matchesSelectedFilters(event)) ||
+      (selectedFilters.length === 0 && matchesTopCardFilter(event)),
   );
 
   const sortedEvents =
@@ -236,6 +185,10 @@ export default function EventsSection({
             key={event.title}
             title={event.title}
             details={event.details}
+            reviewed={isReviewed(event)}
+            onToggleReviewed={(nextReviewed: boolean) =>
+              onToggleReviewed(event.title, nextReviewed)
+            }
           />
         ))}
       </div>

@@ -15,36 +15,17 @@ type EventDetails = {
 type EventCardProps = {
   title: string;
   details?: EventDetails;
+  reviewed?: boolean;
+  onToggleReviewed?: (nextReviewed: boolean) => void;
 };
-
-const REVIEWED_STORAGE_KEY = "orbit-reviewed-events";
-
-const getStoredReviewedState = (title: string) => {
-  try {
-    const raw = window.localStorage.getItem(REVIEWED_STORAGE_KEY);
-    if (!raw) return false;
-    const parsed = JSON.parse(raw) as Record<string, boolean>;
-    return Boolean(parsed[title]);
-  } catch {
-    return false;
-  }
-};
-
-const setStoredReviewedState = (title: string, isReviewed: boolean) => {
-  try {
-    const raw = window.localStorage.getItem(REVIEWED_STORAGE_KEY);
-    const parsed = raw ? (JSON.parse(raw) as Record<string, boolean>) : {};
-    parsed[title] = isReviewed;
-    window.localStorage.setItem(REVIEWED_STORAGE_KEY, JSON.stringify(parsed));
-  } catch {
-    // Ignore storage errors so the UI still works.
-  }
-};
-
-export default function EventCard({ title, details }: EventCardProps) {
+export default function EventCard({
+  title,
+  details,
+  reviewed = false,
+  onToggleReviewed,
+}: EventCardProps) {
   const [showPopup, setShowPopup] = useState(false);
   const [showScreenshotPopup, setShowScreenshotPopup] = useState(false);
-  const [reviewed, setReviewed] = useState(() => getStoredReviewedState(title));
 
   const handleCardClick = () => {
     setShowPopup(true);
@@ -57,8 +38,7 @@ export default function EventCard({ title, details }: EventCardProps) {
 
   const handleToggleReviewed = () => {
     const nextValue = !reviewed;
-    setReviewed(nextValue);
-    setStoredReviewedState(title, nextValue);
+    onToggleReviewed?.(nextValue);
     setShowPopup(false);
     setShowScreenshotPopup(false);
   };
