@@ -1,12 +1,11 @@
 import "../styles/Dashboard.css";
 import ActivityCard from "./ActivityCard";
-import { useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 
 
 type ActivitySelectProps = {
-  activity: string;
-  setActivity: Dispatch<SetStateAction<string>>;
+  selectedActivities: string[];
+  setSelectedActivities: Dispatch<SetStateAction<string[]>>;
   newEventCount: number;
   warningCount: number;
   highRiskCount: number;
@@ -14,17 +13,20 @@ type ActivitySelectProps = {
 };
 
 export default function TodayActivity({
-  activity,
-  setActivity,
+  selectedActivities,
+  setSelectedActivities,
   newEventCount,
   warningCount,
   highRiskCount,
   cyberCount,
 }: ActivitySelectProps) {
-    const [viewingNewEvents, setViewingNewEvents] = useState<boolean>(false);
-    const [viewingWarnings, setViewingWarnings] = useState<boolean>(false);
-    const [viewingHighRisk, setViewingHighRisk] = useState<boolean>(false);
-    const [viewingCyber, setViewingCyber] = useState<boolean>(false);
+  const toggleActivity = (activity: string) => {
+    setSelectedActivities((prev) =>
+      prev.includes(activity)
+        ? prev.filter((value) => value !== activity)
+        : [...prev, activity],
+    );
+  };
 
   return (
     <div className="section">
@@ -34,30 +36,20 @@ export default function TodayActivity({
             title="New Events"
             value={String(newEventCount)}
             type="new-events"
-            viewed={viewingNewEvents}
-            onClick={() => {
-              if (activity) setActivity("");
-              else setActivity("new");
-
-              setViewingNewEvents(!viewingNewEvents);
-            }}
+            viewed={selectedActivities.includes("new")}
+            onClick={() => toggleActivity("new")}
           />
           <div className="line-vertical"></div>
 
           <div className="activity-breakdown">
 
             <ActivityCard
-              title="Warnings"
+              title="Scams"
               value={String(warningCount)}
               type="warning"
               compact
-              viewed={viewingWarnings}
-              onClick={() => {
-                if (activity) setActivity("");
-                else setActivity("warning");
-
-                setViewingWarnings(!viewingWarnings);
-              }}
+              viewed={selectedActivities.includes("warning")}
+              onClick={() => toggleActivity("warning")}
             />
 
             <ActivityCard
@@ -65,13 +57,8 @@ export default function TodayActivity({
               value={String(highRiskCount)}
               type="high-risk"
               compact
-              viewed={viewingHighRisk}
-              onClick={() => {
-                if (activity) setActivity("");
-                else setActivity("risk");
-
-                setViewingHighRisk(!viewingHighRisk);
-              }}
+              viewed={selectedActivities.includes("risk")}
+              onClick={() => toggleActivity("risk")}
             />
 
             <ActivityCard
@@ -79,13 +66,8 @@ export default function TodayActivity({
               value={String(cyberCount)}
               type="cyberbullying"
               compact
-              viewed={viewingCyber}
-              onClick={() => {
-                if (activity) setActivity("");
-                else setActivity("cyber");
-
-                setViewingCyber(!viewingCyber);
-              }}
+              viewed={selectedActivities.includes("cyber")}
+              onClick={() => toggleActivity("cyber")}
             />
 
           </div>

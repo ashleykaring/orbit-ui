@@ -11,7 +11,7 @@ type ActivityCardProps = {
 
 export default function ActivityCard({ title, value, type = 'default', onClick, viewed, compact =false }: ActivityCardProps) {
   return (
-    <div
+    <div 
       className={`activity-card 
       activity-card--${type}
       ${viewed ? "activity-card--active" : ""}

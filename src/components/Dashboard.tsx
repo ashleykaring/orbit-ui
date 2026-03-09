@@ -12,7 +12,7 @@ type DashboardProps = {
 
 
 export default function Dashboard({ isMenuOpen, toggleMenu }: DashboardProps) {
-  const [activitySelect, setActivitySelect] = useState<string>("");
+  const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
   const [reviewedEvents, setReviewedEvents] = useState<Record<string, boolean>>(() => {
     try {
       const raw = window.localStorage.getItem("orbit-reviewed-events");
@@ -92,16 +92,15 @@ export default function Dashboard({ isMenuOpen, toggleMenu }: DashboardProps) {
         <img src="/profile.png" alt="Profile" className="user-icon" />
       </div>
       <TodayActivity
-        activity={activitySelect}
-        setActivity={setActivitySelect}
+        selectedActivities={selectedActivities}
+        setSelectedActivities={setSelectedActivities}
         newEventCount={newEventCount}
         warningCount={warningCount}
         highRiskCount={highRiskCount}
         cyberCount={cyberCount}
       />
       <EventsSection
-        activity={activitySelect}
-        setActivity={setActivitySelect}
+        selectedActivities={selectedActivities}
         events={testEvents}
         reviewedEvents={reviewedEvents}
         onToggleReviewed={(title, nextReviewed) =>
