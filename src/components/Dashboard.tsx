@@ -8,10 +8,11 @@ import { testEvents } from "../data/events";
 type DashboardProps = {
   isMenuOpen?: boolean;
   toggleMenu?: () => void;
+  onNavigate?: (page: string) => void;
 };
 
 
-export default function Dashboard({ isMenuOpen, toggleMenu }: DashboardProps) {
+export default function Dashboard({ isMenuOpen, toggleMenu, onNavigate }: DashboardProps) {
   const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
   const [reviewedEvents, setReviewedEvents] = useState<Record<string, boolean>>(() => {
     try {
@@ -75,6 +76,12 @@ export default function Dashboard({ isMenuOpen, toggleMenu }: DashboardProps) {
     [reviewedEvents],
   );
 
+  const handleProfileClick = () => {
+    if (onNavigate) {
+      onNavigate('profile');
+    }
+  };
+
   return (
     <div className="dashboard">
       <Notification />
@@ -89,7 +96,9 @@ export default function Dashboard({ isMenuOpen, toggleMenu }: DashboardProps) {
         <div className="header-center">
           <img src="/orbit_logo_rectangle_tight_dark.png" alt="Orbit" className="orbit-logo" />
         </div>
-        <img src="/profile.png" alt="Profile" className="user-icon" />
+        <button className="user-icon" onClick={handleProfileClick}>
+          <img src="/profile.png" alt="Profile" width="26" height="26" />
+        </button>
       </div>
       <TodayActivity
         selectedActivities={selectedActivities}

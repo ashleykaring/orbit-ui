@@ -1,11 +1,12 @@
 import "../styles/PhoneWrapper.css";
 import Dashboard from "../components/Dashboard";
+import Profile from "../components/Profile";
 import SafetyRatingsPage from "../components/SafetyRatingsPage";
 import SideMenu from "../components/SideMenu";
 import { useState } from "react";
 import LoginPage from "../components/LoginPage";
 
-export type AppPage = "dashboard" | "safety-ratings";
+export type AppPage = "dashboard" | "profile" | "safety-ratings";
 
 export default function PhoneWrapper() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,7 +46,9 @@ export default function PhoneWrapper() {
           <div className="content-area">
             {isLoggedIn ? (
               activePage === "dashboard" ? (
-                <Dashboard isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+                <Dashboard isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} onNavigate={navigateTo} />
+              ) : activePage === "profile" ? (
+                <Profile onNavigate={navigateTo} />
               ) : (
                 <SafetyRatingsPage isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
               )
