@@ -50,7 +50,7 @@ export default function PhoneWrapper() {
               ) : activePage === "profile" ? (
                 <Profile onNavigate={navigateTo} />
               ) : (
-                <SafetyRatingsPage isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+                <SafetyRatingsPage isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} onNavigate={navigateTo} />
               )
             ) : (
               <LoginPage onSignIn={handleSignIn} />

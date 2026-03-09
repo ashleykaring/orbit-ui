@@ -76,12 +76,6 @@ export default function Dashboard({ isMenuOpen, toggleMenu, onNavigate }: Dashbo
     [reviewedEvents],
   );
 
-  const handleProfileClick = () => {
-    if (onNavigate) {
-      onNavigate('profile');
-    }
-  };
-
   return (
     <div className="dashboard">
       <Notification />
@@ -96,9 +90,7 @@ export default function Dashboard({ isMenuOpen, toggleMenu, onNavigate }: Dashbo
         <div className="header-center">
           <img src="/orbit_logo_rectangle_tight_dark.png" alt="Orbit" className="orbit-logo" />
         </div>
-        <button className="user-icon" onClick={handleProfileClick}>
-          <img src="/profile.png" alt="Profile" width="26" height="26" />
-        </button>
+        <img src="/profile.png" alt="Profile" className="user-icon" style={{ cursor: 'pointer' }} onClick={() => onNavigate?.('profile')} />
       </div>
       <TodayActivity
         selectedActivities={selectedActivities}

@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 type SafetyRatingsPageProps = {
   isMenuOpen?: boolean;
   toggleMenu?: () => void;
+  onNavigate?: (page: string) => void;
 };
 
 type AppSafetyRating = {
@@ -43,6 +44,7 @@ const appRatings: AppSafetyRating[] = [
 export default function SafetyRatingsPage({
   isMenuOpen,
   toggleMenu,
+  onNavigate,
 }: SafetyRatingsPageProps) {
   const [query, setQuery] = useState<string>("");
 
@@ -70,7 +72,7 @@ export default function SafetyRatingsPage({
         <div className="header-center">
           <img src="/orbit_logo_rectangle_tight_dark.png" alt="Orbit" className="orbit-logo" />
         </div>
-        <img src="/profile.png" alt="Profile" className="user-icon" />
+        <img src="/profile.png" alt="Profile" className="user-icon" style={{ cursor: 'pointer' }} onClick={() => onNavigate?.('profile')} />
       </div>
 
       <div className="section">
