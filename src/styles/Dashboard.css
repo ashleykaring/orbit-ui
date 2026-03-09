@@ -289,8 +289,8 @@
 }
 
 .activity-card--new-events.activity-card--active {
-  outline: 2px solid #10b981;
-  box-shadow: 0 6px 18px rgba(16,185,129,0.25);
+  outline: 2px solid #8b5cf6;
+  box-shadow: 0 6px 18px rgba(139,92,246,0.25);
 }
 
 .activity-card--warning.activity-card--active {
@@ -304,8 +304,8 @@
 }
 
 .activity-card--cyberbullying.activity-card--active {
-  outline: 2px solid #8b5cf6;
-  box-shadow: 0 6px 18px rgba(139,92,246,0.25);
+  outline: 2px solid #f97316;
+  box-shadow: 0 6px 18px rgba(249,115,22,0.25);
 }
 
 
